@@ -2,8 +2,8 @@
 var context = null;
 var cameraPosition = 0.0;
 
-var playerX = 300;
-var playerY = 420;
+var playerX = 50;
+var playerY = 335;
 
 var playerSpeed = 5.0;
 
@@ -87,7 +87,7 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    ctx.drawImage(assets.character, 50, 420);
+    ctx.drawImage(assets.character, playerX, playerY);
 }
 
 function DrawEnemies(ctx) {
