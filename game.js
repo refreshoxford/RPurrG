@@ -6,7 +6,46 @@ var assets = {
     character: "images/character.png",
     background: "images/background.png",
     foreground: "images/foreground.png",
+    enemies: [
+        "images/enemy1.png",
+        "images/enemy2.png",
+        "images/enemy3.png
+    ],
 };
+
+var enemies = [];
+var nextEnemyId = 0;
+
+function Enemy(type, posX, posY, hit) {
+    this.id = nextEnemyId;
+    nextEnemyId++; 
+    this.type = type;
+    this.posX = posX;
+    this.posY = posY;
+    this.hit = hit;
+    var draw = function(ctx) {
+        ctx.drawImage(assests.enemies[i], this.posX, this.posY);
+    };
+    var update = function(movX, movY, dmg) {
+        this.posX += movX;
+        this.posY += movY;
+        this.hit -= dmg;
+    };
+}
+
+function addEnemy(enemy) {
+    enemies[enemies.length] = enemy;
+}
+
+function removeEnemy(id) {
+    for (var i = 0; i < enemies.length; i++) {
+        if (enemies[i].id === id) {
+            enemies.splice(i,1);
+            return true;
+        }
+    }
+    return false;
+}
 
 function LoadAssets(fn) {
 
@@ -42,7 +81,13 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    context.drawImage(assets.character, 50, 420);
+    ctx.drawImage(assets.character, 50, 420);
+}
+
+function DrawEnemies(ctx) {
+    $.each(enemies, function(idx, elt) {
+        enemies[idx].draw(); 
+    }, false);
 }
 
 function GameLoop() {
