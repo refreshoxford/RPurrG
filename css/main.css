@@ -570,6 +570,6 @@ td {
 /* line 22, ../sass/main.sass */
 #canvas {
   width: 800px;
-  height: 800px;
+  height: 600px;
   display: none;
 }
