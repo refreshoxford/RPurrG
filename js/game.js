@@ -11,7 +11,8 @@ var FPS = 50;
 
 var assets = {
     character:  "img/character.png",
-    background: "img/background.png",
+    backgroundFar: "img/background.png",
+    backgroundMid: "img/middle.png",
     foreground: "img/foreground.png",
     enemy1:     "img/enemy1.png",
     enemy2:     "img/enemy2.png",
@@ -74,9 +75,13 @@ function LoadAssets(fn) {
 }
 
 function DrawParallaxBackground(ctx) {
-    backgroundPos = cameraPosition % assets.background.width;
-    ctx.drawImage(assets.background, -backgroundPos, 0);
-    ctx.drawImage(assets.background, -backgroundPos + 800, 0);
+    backgroundPos = cameraPosition % assets.backgroundFar.width;
+    ctx.drawImage(assets.backgroundFar, -backgroundPos, 0);
+    ctx.drawImage(assets.backgroundFar, -backgroundPos + assets.backgroundFar.width, 0);
+
+    middlePos = cameraPosition * 1.3 % assets.backgroundMid.width;
+    ctx.drawImage(assets.backgroundMid, -middlePos, 408);
+    ctx.drawImage(assets.backgroundMid, -middlePos + assets.backgroundMid.width, 408);
 }
 
 function DrawParallaxForeground(ctx) {
@@ -87,7 +92,7 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    ctx.drawImage(assets.character, playerX, playerY);
+    ctx.drawImage(assets.character, playerX - cameraPosition, playerY);
 }
 
 function DrawEnemies(ctx) {
