@@ -4,6 +4,7 @@ var cameraPosition = 0.0;
 
 var playerX = 50;
 var playerY = 345;
+var plyAnimationState = 0;
 
 var playerSpeed = 5.0;
 
@@ -11,12 +12,21 @@ var FPS = 50;
 
 var assets = {
     character:  "img/character.png",
+    character-walk: "img/character-b.png",
     backgroundFar: "img/background.png",
     backgroundMid: "img/middle.png",
     foreground: "img/foreground.png",
     enemy1:     "img/enemy1.png",
     enemy2:     "img/enemy2.png",
     enemy3:     "img/enemy3.png",
+};
+
+function characterWalk() {
+    if (plyAnimationState === 0) {
+        plyAnimationState = 1;
+    } else {
+        plyAnimationState = 0;
+    }
 };
 
 var enemies = [];
@@ -92,7 +102,8 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    ctx.drawImage(assets.character, playerX - cameraPosition, playerY);
+    var sprite = plyAnimationState === 0 ? assets.character : assets.character-walk;
+    ctx.drawImage(sprite, playerX - cameraPosition, playerY);
 }
 
 function DrawEnemies(ctx) {

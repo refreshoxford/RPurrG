@@ -74,13 +74,14 @@ $(function() {
                       cameraPosition -= playerSpeed
                       if(cameraPosition < 0) cameraPosition = 0;
                   }
+                  characterWalk();
                   break;
-              break;
               case 39:  /* Right arrow was pressed */
                   playerX += playerSpeed;
                   if(playerX - cameraPosition > 500) {
                       cameraPosition += playerSpeed
                   }
+                  characterWalk();
               break;
           }
       });
