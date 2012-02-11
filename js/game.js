@@ -13,7 +13,7 @@ var FPS = 50;
 
 var assets = {
     character:  "img/character.png",
-    character-walk: "img/character-b.png",
+    character_walk: "img/character-b.png",
     backgroundFar: "img/background.png",
     backgroundMid: "img/middle.png",
     foreground: "img/foreground.png",
@@ -104,7 +104,7 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    var sprite = plyAnimationState === 0 ? assets.character : assets.character-walk;
+    var sprite = plyAnimationState === 0 ? assets.character : assets.character_walk;
     ctx.drawImage(sprite, playerX - cameraPosition, playerY);
     w = assets.character.width;
     h = assets.character.height;
