@@ -9,35 +9,46 @@ function Player() {
     this.FacingBackwards = false;
     this._jumpCounter = -1;
     this._jumpHeight = 0;
+    this._animationState = 0;
 
     this.Draw = function(ctx) {
+        var sprite = this._animationState === 0 ? assets.character : assets.character_walk;
         w = assets.character.width;
         h = assets.character.height;
         if(this.FacingBackwards) {
             ctx.save()
             ctx.scale(-1, 1);
-            ctx.drawImage(assets.character, -this.X + cameraPosition - assets.character.width, this.Y - this._jumpHeight);
+            ctx.drawImage(sprite, -this.X + cameraPosition - assets.character.width, this.Y - this._jumpHeight);
             ctx.restore()
         } else {
-            ctx.drawImage(assets.character, this.X - cameraPosition, this.Y - this._jumpHeight);
+            ctx.drawImage(sprite, this.X - cameraPosition, this.Y - this._jumpHeight);
         }
     };
 
     this.Update = function() {
 
         var JUMP_FRAMES = 30;
+        var JUMP_FACTOR = 4;
 
         if(this._jumpCounter > -1){
             this._jumpCounter++;
         }
 
         if(this._jumpCounter < JUMP_FRAMES / 2) {
-            this._jumpHeight = 2 * this._jumpCounter
+            this._jumpHeight = JUMP_FACTOR * this._jumpCounter
         } else if (this._jumpCounter < JUMP_FRAMES) {
-            this._jumpHeight = 2 * (JUMP_FRAMES - this._jumpCounter);
+            this._jumpHeight = JUMP_FACTOR * (JUMP_FRAMES - this._jumpCounter);
         } else {
             this._jumpHeight = 0;
             this._jumpCounter = -1;
+        }
+    };
+
+    this.Walk = function() {
+        if (this._animationState === 0) {
+            this._animationState = 1;
+        } else {
+            this._animationState = 0;
         }
     };
 
@@ -56,12 +67,16 @@ var FPS = 50;
 
 var assets = {
     character:  "img/character.png",
+    character_walk: "img/character-b.png",
     backgroundFar: "img/background.png",
     backgroundMid: "img/middle.png",
     foreground: "img/foreground.png",
     enemy1:     "img/enemy1.png",
     enemy2:     "img/enemy2.png",
     enemy3:     "img/enemy3.png",
+};
+
+function characterWalk() {
 };
 
 var enemies = [];
@@ -173,6 +188,7 @@ function InitKeyboardHandler() {
                       cameraPosition -= playerSpeed
                       if(cameraPosition < 0) cameraPosition = 0;
                   }
+                  player.Walk();
                   break;
               case 39:  /* Right arrow was pressed */
                   player.X += playerSpeed;
@@ -180,6 +196,7 @@ function InitKeyboardHandler() {
                   if(player.X - cameraPosition > 500) {
                       cameraPosition += playerSpeed
                   }
+                  player.Walk();
                   break;
 
               case 32: // Spaaaaaace
