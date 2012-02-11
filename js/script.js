@@ -48,7 +48,6 @@ $(function() {
   });
 
   function initialise(selectedCat, playerName) {
-    messages.html(playerName +', you have selected '+ selectedCat);
 
     $('#cat-selection').fadeOut(function() {
       $('#canvas').fadeIn();
