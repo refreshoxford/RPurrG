@@ -170,38 +170,36 @@ function GameLoop() {
 }
 
 function InitKeyboardHandler() {
-
     $(window).keydown(function(evt) {
-          switch (evt.keyCode) {
-              case 38:  /* Up arrow was pressed */
-                  player.Y -= playerSpeed;
-                  if(player.Y < 300) player.Y = 300;
-                  break;
-              case 40:  /* Down arrow was pressed */
-                  player.Y += playerSpeed;
-                  if(player.Y > 450) player.Y = 450;
-                  break;
-              case 37:  /* Left arrow was pressed */
-                  player.X -= playerSpeed;
-                  player.FacingBackwards = true;
-                  if(player.X - cameraPosition < 200) {
-                      cameraPosition -= playerSpeed
-                      if(cameraPosition < 0) cameraPosition = 0;
-                  }
-                  player.Walk();
-                  break;
-              case 39:  /* Right arrow was pressed */
-                  player.X += playerSpeed;
-                  player.FacingBackwards = false;
-                  if(player.X - cameraPosition > 500) {
-                      cameraPosition += playerSpeed
-                  }
-                  player.Walk();
-                  break;
-
-              case 32: // Spaaaaaace
-                player.Jump();
+        switch (evt.keyCode) {
+            //case 38:  /* Up arrow was pressed */
+            //    player.Y -= playerSpeed;
+            //    if(player.Y < 300) player.Y = 300;
+            //   break;
+            //case 40:  /* Down arrow was pressed */
+            //    player.Y += playerSpeed;
+            //    if(player.Y > 450) player.Y = 450;
+            //    break;
+            case 37:  /* Left arrow was pressed */
+                player.X -= playerSpeed;
+                player.FacingBackwards = true;
+                if(player.X - cameraPosition < 200) {
+                    cameraPosition -= playerSpeed
+                    if(cameraPosition < 0) cameraPosition = 0;
+                }
+                player.Walk();
                 break;
-          }
-      });
+            case 39:  /* Right arrow was pressed */
+                player.X += playerSpeed;
+                player.FacingBackwards = false;
+                if(player.X - cameraPosition > 500) {
+                    cameraPosition += playerSpeed
+                }
+                player.Walk();
+                break;
+            case 32: // Spaaaaaace
+              player.Jump();
+              break;
+        }
+    });
 }
