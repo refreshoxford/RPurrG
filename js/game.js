@@ -2,9 +2,53 @@
 var context = null;
 var cameraPosition = 0.0;
 
-var playerX = 50;
-var playerY = 348;
-var playerFacingBackwards = false;
+// Class to handle all of the data relating to the player character.
+function Player() {
+    this.X = 50;
+    this.Y = 348;
+    this.FacingBackwards = false;
+    this._jumpCounter = -1;
+    this._jumpHeight = 0;
+
+    this.Draw = function(ctx) {
+        w = assets.character.width;
+        h = assets.character.height;
+        if(this.FacingBackwards) {
+            ctx.save()
+            ctx.scale(-1, 1);
+            ctx.drawImage(assets.character, -this.X + cameraPosition - assets.character.width, this.Y - this._jumpHeight);
+            ctx.restore()
+        } else {
+            ctx.drawImage(assets.character, this.X - cameraPosition, this.Y - this._jumpHeight);
+        }
+    };
+
+    this.Update = function() {
+
+        var JUMP_FRAMES = 30;
+
+        if(this._jumpCounter > -1){
+            this._jumpCounter++;
+        }
+
+        if(this._jumpCounter < JUMP_FRAMES / 2) {
+            this._jumpHeight = 2 * this._jumpCounter
+        } else if (this._jumpCounter < JUMP_FRAMES) {
+            this._jumpHeight = 2 * (JUMP_FRAMES - this._jumpCounter);
+        } else {
+            this._jumpHeight = 0;
+            this._jumpCounter = -1;
+        }
+    };
+
+    this.Jump = function() {
+        if(this._jumpCounter < 0) {
+            this._jumpCounter = 0
+        }
+    }
+}
+
+var player = new Player();
 
 var playerSpeed = 7.0;
 
@@ -93,19 +137,6 @@ function DrawParallaxForeground(ctx) {
     ctx.drawImage(assets.foreground, -foregroundPos + (assets.foreground.width * 2), 475);
 }
 
-function DrawPlayer(ctx) {
-    w = assets.character.width;
-    h = assets.character.height;
-    if(playerFacingBackwards) {
-        ctx.save()
-        ctx.scale(-1, 1);
-        ctx.drawImage(assets.character, -playerX - cameraPosition - assets.character.width, playerY);
-        ctx.restore()
-    } else {
-        ctx.drawImage(assets.character, playerX - cameraPosition, playerY);
-    }
-}
-
 function DrawEnemies(ctx) {
     $.each(enemies, function(idx, elt) {
         enemies[idx].draw(ctx); 
@@ -114,8 +145,10 @@ function DrawEnemies(ctx) {
 
 function GameLoop() {
 
+    player.Update();
+
     DrawParallaxBackground(context);
-    DrawPlayer(context);
+    player.Draw(context);
     DrawParallaxForeground(context);
 
     setTimeout(GameLoop, 1000/FPS);
@@ -126,30 +159,32 @@ function InitKeyboardHandler() {
     $(window).keydown(function(evt) {
           switch (evt.keyCode) {
               case 38:  /* Up arrow was pressed */
-                  playerY -= playerSpeed;
-                  if(playerY < 300) playerY = 300;
+                  player.Y -= playerSpeed;
+                  if(player.Y < 300) player.Y = 300;
                   break;
               case 40:  /* Down arrow was pressed */
-                  playerY += playerSpeed;
-                  if(playerY > 450) playerY = 450;
+                  player.Y += playerSpeed;
+                  if(player.Y > 450) player.Y = 450;
                   break;
-              break;
               case 37:  /* Left arrow was pressed */
-                  playerX -= playerSpeed;
-                  playerFacingBackwards = true;
-                  if(playerX - cameraPosition < 200) {
+                  player.X -= playerSpeed;
+                  player.FacingBackwards = true;
+                  if(player.X - cameraPosition < 200) {
                       cameraPosition -= playerSpeed
                       if(cameraPosition < 0) cameraPosition = 0;
                   }
                   break;
-              break;
               case 39:  /* Right arrow was pressed */
-                  playerX += playerSpeed;
-                  playerFacingBackwards = false;
-                  if(playerX - cameraPosition > 500) {
+                  player.X += playerSpeed;
+                  player.FacingBackwards = false;
+                  if(player.X - cameraPosition > 500) {
                       cameraPosition += playerSpeed
                   }
-              break;
+                  break;
+
+              case 32: // Spaaaaaace
+                player.Jump();
+                break;
           }
       });
 }
