@@ -3,10 +3,11 @@ var context = null;
 var cameraPosition = 0.0;
 
 var playerX = 50;
-var playerY = 345;
 var plyAnimationState = 0;
+var playerY = 348;
+var playerFacingBackwards = false;
 
-var playerSpeed = 5.0;
+var playerSpeed = 7.0;
 
 var FPS = 50;
 
@@ -90,20 +91,31 @@ function DrawParallaxBackground(ctx) {
     ctx.drawImage(assets.backgroundFar, -backgroundPos + assets.backgroundFar.width, 0);
 
     middlePos = cameraPosition * 1.3 % assets.backgroundMid.width;
-    ctx.drawImage(assets.backgroundMid, -middlePos, 408);
-    ctx.drawImage(assets.backgroundMid, -middlePos + assets.backgroundMid.width, 408);
+    ctx.drawImage(assets.backgroundMid, -middlePos, 412);
+    ctx.drawImage(assets.backgroundMid, -middlePos + assets.backgroundMid.width, 412);
+    ctx.drawImage(assets.backgroundMid, -middlePos + (assets.backgroundMid.width * 2), 412);
 }
 
 function DrawParallaxForeground(ctx) {
     foregroundPos = cameraPosition * 2 % assets.foreground.width;
     ctx.drawImage(assets.foreground, -foregroundPos, 475);
-    ctx.drawImage(assets.foreground, -foregroundPos + 400, 475);
-    ctx.drawImage(assets.foreground, -foregroundPos + 800, 475);
+    ctx.drawImage(assets.foreground, -foregroundPos + assets.foreground.width, 475);
+    ctx.drawImage(assets.foreground, -foregroundPos + (assets.foreground.width * 2), 475);
 }
 
 function DrawPlayer(ctx) {
     var sprite = plyAnimationState === 0 ? assets.character : assets.character-walk;
     ctx.drawImage(sprite, playerX - cameraPosition, playerY);
+    w = assets.character.width;
+    h = assets.character.height;
+    if(playerFacingBackwards) {
+        ctx.save()
+        ctx.scale(-1, 1);
+        ctx.drawImage(sprite, -playerX - cameraPosition - assets.character.width, playerY);
+        ctx.restore()
+    } else {
+        ctx.drawImage(sprite, playerX - cameraPosition, playerY);
+    }
 }
 
 function DrawEnemies(ctx) {
@@ -121,3 +133,35 @@ function GameLoop() {
     setTimeout(GameLoop, 1000/FPS);
 }
 
+function InitKeyboardHandler() {
+
+    $(window).keydown(function(evt) {
+          switch (evt.keyCode) {
+              case 38:  /* Up arrow was pressed */
+                  playerY -= playerSpeed;
+                  if(playerY < 300) playerY = 300;
+                  break;
+              case 40:  /* Down arrow was pressed */
+                  playerY += playerSpeed;
+                  if(playerY > 450) playerY = 450;
+                  break;
+              case 37:  /* Left arrow was pressed */
+                  playerX -= playerSpeed;
+                  playerFacingBackwards = true;
+                  if(playerX - cameraPosition < 200) {
+                      cameraPosition -= playerSpeed
+                      if(cameraPosition < 0) cameraPosition = 0;
+                  }
+                  characterWalk();
+                  break;
+              case 39:  /* Right arrow was pressed */
+                  playerX += playerSpeed;
+                  playerFacingBackwards = false;
+                  if(playerX - cameraPosition > 500) {
+                      cameraPosition += playerSpeed
+                  }
+                  characterWalk();
+              break;
+          }
+      });
+}
