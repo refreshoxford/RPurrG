@@ -69,9 +69,11 @@ $(document).ready(function() {
         switch (evt.keyCode) {
             case 38:  /* Up arrow was pressed */
                 playerY -= playerSpeed;
+                if(playerY < 300) playerY = 300;
                 break;
             case 40:  /* Down arrow was pressed */
                 playerY += playerSpeed;
+                if(playerY > 450) playerY = 450;
                 break;
             break;
             case 37:  /* Left arrow was pressed */
