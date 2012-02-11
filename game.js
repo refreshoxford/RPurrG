@@ -5,7 +5,7 @@ var cameraPosition = 0.0;
 var playerX = 300;
 var playerY = 420;
 
-var playerSpeed = 2.5;
+var playerSpeed = 5.0;
 
 var FPS = 50;
 
@@ -58,7 +58,7 @@ function GameLoop() {
     DrawPlayer(context);
     DrawParallaxForeground(context);
 
-    setInterval(GameLoop, 1000/FPS);
+    setTimeout(GameLoop, 1000/FPS);
 }
 
 $(document).ready(function() {
