@@ -543,7 +543,7 @@ td {
 /* line 9, ../sass/main.sass */
 #game-container {
   width: 800px;
-  height: 600px;
+  height: 800px;
   margin: 0 auto;
 }
 
@@ -561,4 +561,15 @@ td {
   -webkit-box-flex: 1;
   -ms-box-flex: 1;
   box-flex: 1;
+}
+/* line 19, ../sass/main.sass */
+#cat-selection .cat.selected {
+  background: green;
+}
+
+/* line 22, ../sass/main.sass */
+#canvas {
+  width: 800px;
+  height: 800px;
+  display: none;
 }

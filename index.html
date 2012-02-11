@@ -72,16 +72,19 @@
           <ul>
         </section>
 
+        <input type="text" id="player-name" placeholder="What's your name?" required>
+
+        <a href="#" id="start-game">Start game!</a>
 
       </div>
 
-      <input type="text" id="player-name" placeholder="What's your name?" required>
-
-      <a href="#" id="start-game">Start game!</a>
+      <canvas id="canvas" width="800px" height="800px" />
 
       </section>
 
       <div id="messages"></div>
+
+
 
     </div>
   </div>
@@ -102,6 +105,7 @@
 
   <!-- scripts concatenated and minified via build script -->
   <script src="js/plugins.js"></script>
+  <script src="game.js"></script>
   <script src="js/script.js"></script>
   <!-- end scripts -->
 

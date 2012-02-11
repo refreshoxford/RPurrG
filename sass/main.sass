@@ -8,7 +8,7 @@
 
 #game-container
   width: 800px
-  height: 600px
+  height: 800px
   margin: 0 auto
 
 #cat-selection
@@ -16,4 +16,11 @@
   .cat
     width: 200px
     @include box-flex(1)
+    &.selected
+      background: green
+
+#canvas
+  width: 800px
+  height: 800px
+  display: none
 

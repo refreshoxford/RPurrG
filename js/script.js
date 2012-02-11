@@ -7,13 +7,22 @@ $(function() {
     //Set the selected cat variable
     selectedCat = $(this).attr('id');
 
+    //Remove other active class from other cats
+    $('#cat-selection .cat.selected').removeClass('selected');
+
+    $(this).addClass('selected');
+
     //Check for a username
     if($('#player-name').val() != ''){
       $('#start-game').addClass('active');
     } 
 
-    messages.html('You have selected ' + selectedCat);
+  });
 
+  $('#player-name').on('blur', function() {
+    if(selectedCat) {
+      $('#start-game').addClass('active');
+    }
   });
 
   $('#start-game').on('click', function(e) {
@@ -24,12 +33,12 @@ $(function() {
 
       var playerName = $('#player-name').val();
       if(selectedCat && playerName) {
-        console.log(selectedCat)
-
+        
         //Initialise the game
         initialise(selectedCat, playerName)
 
       } else {
+
         console.log('You havent selected a cat');
 
       }
@@ -39,7 +48,17 @@ $(function() {
   });
 
   function initialise(selectedCat, playerName) {
-    messages.html(playerName +', you have selected '+ selectedCat); 
+    messages.html(playerName +', you have selected '+ selectedCat);
+
+    $('#cat-selection').fadeOut(function() {
+      $('#canvas').fadeIn();
+    });
+
+    
+    var canvas = document.getElementById("canvas");  
+    context = canvas.getContext("2d");  
+
+    LoadAssets(GameLoop);
   
   }
 
