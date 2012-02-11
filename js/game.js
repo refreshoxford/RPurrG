@@ -105,7 +105,6 @@ function DrawParallaxForeground(ctx) {
 
 function DrawPlayer(ctx) {
     var sprite = plyAnimationState === 0 ? assets.character : assets.character_walk;
-    ctx.drawImage(sprite, playerX - cameraPosition, playerY);
     w = assets.character.width;
     h = assets.character.height;
     if(playerFacingBackwards) {
