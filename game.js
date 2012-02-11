@@ -16,7 +16,7 @@ var assets = {
     enemies: [
         "images/enemy1.png",
         "images/enemy2.png",
-        "images/enemy3.png
+        "images/enemy3.png"
     ],
 };
 
@@ -106,34 +106,3 @@ function GameLoop() {
     setTimeout(GameLoop, 1000/FPS);
 }
 
-$(document).ready(function() {
-    
-  $(window).keydown(function(evt) {
-        switch (evt.keyCode) {
-            case 38:  /* Up arrow was pressed */
-                playerY -= playerSpeed;
-                if(playerY < 300) playerY = 300;
-                break;
-            case 40:  /* Down arrow was pressed */
-                playerY += playerSpeed;
-                if(playerY > 450) playerY = 450;
-                break;
-            break;
-            case 37:  /* Left arrow was pressed */
-                playerX -= playerSpeed;
-                if(playerX - cameraPosition < 200) {
-                    cameraPosition -= playerSpeed
-                    if(cameraPosition < 0) cameraPosition = 0;
-                }
-                break;
-            break;
-            case 39:  /* Right arrow was pressed */
-                playerX += playerSpeed;
-                if(playerX - cameraPosition > 500) {
-                    cameraPosition += playerSpeed
-                }
-            break;
-        }
-    });
-
-})
