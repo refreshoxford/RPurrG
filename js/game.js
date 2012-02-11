@@ -63,7 +63,7 @@ var player = new Player();
 
 var playerSpeed = 7.0;
 
-var FPS = 50;
+var FPS = 30;
 
 var assets = {
     character:  "img/character.png",
@@ -158,7 +158,13 @@ function DrawEnemies(ctx) {
     }, false);
 }
 
+var frameCount = 0;
+
 function GameLoop() {
+
+    frameCount++;
+    
+    processKeyState();
 
     player.Update();
 
@@ -167,39 +173,68 @@ function GameLoop() {
     DrawParallaxForeground(context);
 
     setTimeout(GameLoop, 1000/FPS);
+    
+    if (frameCount > 3) frameCount = 0;
+}
+
+var keyboardState = [];
+
+function addKeyToState(keyCode) {
+    for (var i =0; i < keyboardState.length; i++) {
+        if (keyboardState[i] === keyCode) return false;
+    }
+    keyboardState[keyboardState.length] = keyCode;
+    return true;
+}
+
+function removeKeyFromState(keyCode) {
+    for (var i = 0; i < keyboardState.length; i++) {
+        if (keyboardState[i] === keyCode) keyboardState.splice(i, 1);
+    }
+}
+
+function processKeyState() {
+    for (var i =0; i < keyboardState.length; i++) {
+        switch(keyboardState[i]) {
+            case 37: // Left cursor
+                player.X -= playerSpeed;
+                player.FacingBackwards = true;
+                if (player.X - cameraPosition < 200) {
+                    cameraPosition -= playerSpeed;
+                    if (cameraPosition < 0) cameraPosition = 0;
+                }
+                if (frameCount === 3) player.Walk();
+                break;
+            case 39: // Right cursor
+                player.X += playerSpeed;
+                player.FacingBackwards = false;
+                if (player.X - cameraPosition > 500) {
+                    cameraPosition += playerSpeed;
+                }
+                if (frameCount === 3) player.Walk();
+                break;
+        }
+    }
 }
 
 function InitKeyboardHandler() {
     $(window).keydown(function(evt) {
-        switch (evt.keyCode) {
-            //case 38:  /* Up arrow was pressed */
-            //    player.Y -= playerSpeed;
-            //    if(player.Y < 300) player.Y = 300;
-            //   break;
-            //case 40:  /* Down arrow was pressed */
-            //    player.Y += playerSpeed;
-            //    if(player.Y > 450) player.Y = 450;
-            //    break;
-            case 37:  /* Left arrow was pressed */
-                player.X -= playerSpeed;
-                player.FacingBackwards = true;
-                if(player.X - cameraPosition < 200) {
-                    cameraPosition -= playerSpeed
-                    if(cameraPosition < 0) cameraPosition = 0;
-                }
-                player.Walk();
+        switch(evt.keyCode) {
+            case 37: // Left cursor
+            case 39: // Right cursor
+                addKeyToState(evt.keyCode);
                 break;
-            case 39:  /* Right arrow was pressed */
-                player.X += playerSpeed;
-                player.FacingBackwards = false;
-                if(player.X - cameraPosition > 500) {
-                    cameraPosition += playerSpeed
-                }
-                player.Walk();
+            case 32: // Space
+                player.Jump();
                 break;
-            case 32: // Spaaaaaace
-              player.Jump();
-              break;
+        }
+    });
+    $(window).keyup(function(evt) {
+        switch(evt.keyCode) {
+            case 37: // Left cursor
+            case 39: // Right cursor
+                removeKeyFromState(evt.keyCode);
+                break;
         }
     });
 }
