@@ -10,13 +10,13 @@ var playerSpeed = 5.0;
 var FPS = 50;
 
 var assets = {
-    character: "images/character.png",
-    background: "images/background.png",
-    foreground: "images/foreground.png",
+    character: "img/character.png",
+    background: "img/background.png",
+    foreground: "img/foreground.png",
     enemies: [
-        "images/enemy1.png",
-        "images/enemy2.png",
-        "images/enemy3.png"
+        "img/enemy1.png",
+        "img/enemy2.png",
+        "img/enemy3.png"
     ],
 };
 
