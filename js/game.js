@@ -3,7 +3,7 @@ var context = null;
 var cameraPosition = 0.0;
 
 var playerX = 50;
-var playerY = 335;
+var playerY = 345;
 
 var playerSpeed = 5.0;
 
