@@ -23,9 +23,10 @@
 </head>
 <body>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-  <header>
+  <header id="site-header">
     <div class="structure">
       <a href="/" id="site-logo">RPuurG</a>
+      <h3>An RPG, but with more cats.</h3>
     </div>
   </header>
   <div role="main">
@@ -34,47 +35,47 @@
       <section id="game-container">
 
       <div id="cat-selection">
-
-        <header>
-
-          <h2>To start, choose a cat from below and enter your name!</h2>
-
-        </header>
+        
+        <h2>Choose your purrlayer:</h2>
 
         <div id="cat-container">
 
+
           <section class="cat" id="cat-1">
-            <h3>Pirate Cat</h3>
-            <ul>
-              <li>22</li>
-              <li>14</li>
-              <li>13</li>
+            <h4>Catbrush Purrwood</h4>
+            <div class="cat-image">
+              <img src="img/cats/pirate-front.png">
+            </div> 
+            <ul class="cat-stats">
+              <li class="health">9</li>
+              <li class="attack">10</li>
+              <li class="magic">2</li>
             <ul>
           </section>
-          
+
           <section class="cat" id="cat-2">
-            <h3>Magic Cat</h3>
-            <ul>
-              <li>22</li>
-              <li>14</li>
-              <li>13</li>
+            <h4>Rincecat</h4>
+            <div class="cat-image">
+              <img src="img/cats/magic-front.png">
+            </div>  
+            <ul class="cat-stats">
+              <li class="health">7</li>
+              <li class="attack">2</li>
+              <li class="magic">12</li>
             <ul>
           </section>
 
           <section class="cat" id="cat-3">
-            <h3>Pirate Cat</h3>
-            <ul>
-              <li>22</li>
-              <li>14</li>
-              <li>13</li>
-            <ul>
           </section>
-
+          
         </div>
 
-        <input type="text" id="player-name" placeholder="What's your name?">
+        <section id="player-info">
+          <label for="player-name">Hero's name:</label>
+          <input type="text" id="player-name">
 
-        <a href="#" id="start-game">Start game!</a>
+          <a href="#" id="start-game">Go</a>
+        </section>
 
       </div>
 

@@ -51,7 +51,7 @@ button, input, select, textarea {
 body {
   margin: 0;
   font-size: 1em;
-  line-height: 1.4;
+  line-height: 1;
 }
 
 /* =============================================================================
@@ -538,25 +538,34 @@ td {
 body {
   background: #f1f1f1;
   font-family: "Lilita One", cursive;
+  font-weight: normal !important;
 }
 
-/* line 9, ../sass/main.sass */
+/* line 10, ../sass/main.sass */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+/* line 13, ../sass/main.sass */
 #site-header {
   margin: 40px 0 10px 0;
 }
-/* line 11, ../sass/main.sass */
+/* line 15, ../sass/main.sass */
 #site-header .structure {
   height: 58px;
 }
-/* line 13, ../sass/main.sass */
+/* line 17, ../sass/main.sass */
 #site-header h3 {
   color: #4c9dae;
   font-size: 24px;
   float: right;
   margin: 0;
+  position: absolute;
+  right: 10px;
+  bottom: 0;
 }
 
-/* line 20, ../sass/main.sass */
+/* line 27, ../sass/main.sass */
 #site-logo {
   width: 157px;
   height: 58px;
@@ -568,10 +577,11 @@ body {
   margin: 0 0 0 10px;
 }
 
-/* line 30, ../sass/main.sass */
+/* line 37, ../sass/main.sass */
 .structure {
   width: 800px;
   margin: 0 auto;
+  position: relative;
   zoom: 1;
 }
 /* line 442, ../sass/_boilerplate.sass */
@@ -584,14 +594,14 @@ body {
   clear: both;
 }
 
-/* line 35, ../sass/main.sass */
+/* line 43, ../sass/main.sass */
 #game-container {
   width: 800px;
   height: 600px;
   margin: 0 auto;
 }
 
-/* line 40, ../sass/main.sass */
+/* line 48, ../sass/main.sass */
 #cat-selection {
   background: white;
   padding: 25px;
@@ -603,23 +613,25 @@ body {
   -khtml-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 45, ../sass/main.sass */
+/* line 53, ../sass/main.sass */
 #cat-selection h2 {
   color: #666666;
   font-size: 34px;
 }
 
-/* line 50, ../sass/main.sass */
+/* line 58, ../sass/main.sass */
 #cat-container {
+  margin: 0 0 40px 0;
   display: -moz-box;
   display: -webkit-box;
   display: -ms-box;
   display: box;
 }
-/* line 52, ../sass/main.sass */
+/* line 61, ../sass/main.sass */
 #cat-container .cat {
   width: 200px;
-  padding: 25px 15px;
+  min-height: 330px;
+  padding: 25px 10px 15px 10px;
   margin: 0 25px 0 0;
   text-align: center;
   cursor: pointer;
@@ -635,44 +647,111 @@ body {
   -ms-box-flex: 1;
   box-flex: 1;
 }
-/* line 61, ../sass/main.sass */
+/* line 71, ../sass/main.sass */
 #cat-container .cat:last-of-type {
   margin: 0;
 }
-/* line 63, ../sass/main.sass */
+/* line 73, ../sass/main.sass */
 #cat-container .cat.selected {
   background: #c8f2f8;
 }
-/* line 65, ../sass/main.sass */
+/* line 75, ../sass/main.sass */
 #cat-container .cat.selected h4 {
   color: #4c9dae;
 }
-/* line 67, ../sass/main.sass */
+/* line 77, ../sass/main.sass */
 #cat-container .cat h4 {
   color: #666666;
   font-size: 24px;
-  float: right;
   margin: 0 0 15px 0;
 }
-/* line 74, ../sass/main.sass */
+/* line 83, ../sass/main.sass */
+#cat-container .cat .cat-image {
+  height: 270px;
+}
+/* line 86, ../sass/main.sass */
 #cat-container .cat ul {
   list-style: none;
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
   display: -moz-box;
   display: -webkit-box;
   display: -ms-box;
   display: box;
 }
-/* line 79, ../sass/main.sass */
+/* line 91, ../sass/main.sass */
 #cat-container .cat ul li {
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 3px 2px;
+  margin: 0 5px 0 0;
+  padding: 5px 10px;
+  text-align: right;
+  color: #666666;
+  font-size: 22px;
   -moz-box-flex: 1;
   -webkit-box-flex: 1;
   -ms-box-flex: 1;
   box-flex: 1;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+}
+/* line 104, ../sass/main.sass */
+#cat-container .cat ul li.health {
+  background-image: url(../img/icons/heart.png);
+}
+/* line 107, ../sass/main.sass */
+#cat-container .cat ul li.attack {
+  background-image: url(../img/icons/sword.png);
+}
+/* line 110, ../sass/main.sass */
+#cat-container .cat ul li.magic {
+  background-image: url(../img/icons/magichat.png);
+  margin: 0;
 }
 
-/* line 84, ../sass/main.sass */
+/* line 114, ../sass/main.sass */
+#player-info {
+  height: 45px;
+  margin: 10px 0 0 0;
+}
+/* line 117, ../sass/main.sass */
+#player-info label {
+  font-size: 28px;
+  color: #666666;
+}
+/* line 121, ../sass/main.sass */
+#player-info input {
+  padding: 10px;
+  border: 2px solid #d6d6d6;
+  outline: 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+}
+/* line 126, ../sass/main.sass */
+#player-info #start-game {
+  font-size: 28px;
+  color: white;
+  background: #428b9a;
+  text-decoration: none;
+  padding: 5px 15px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 137, ../sass/main.sass */
 #canvas {
   width: 800px;
   height: 600px;

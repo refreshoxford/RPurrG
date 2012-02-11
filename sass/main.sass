@@ -1,0 +1,140 @@
+@import compass/css3
+
+@import boilerplate
+
+body
+  background: #F1F1F1
+  font-family: 'Lilita One', cursive
+  font-weight: normal !important
+
+h1, h2, h3, h4, h5, h6
+  font-weight: normal
+
+#site-header
+  margin: 40px 0 10px 0
+  .structure
+    height: 58px
+  h3
+    color: #4C9DAE
+    font:   
+      size: 24px
+    float: right
+    margin: 0
+    position: absolute
+    right: 10px
+    bottom: 0
+
+#site-logo
+  width: 157px
+  height: 58px
+  display: block
+  text-indent: -9999em
+  overflow: hidden
+  background: url(../img/site-logo.png) no-repeat
+  float: left
+  margin: 0 0 0 10px
+
+.structure
+  width: 800px
+  margin: 0 auto
+  position: relative
+  @include clearfix
+
+#game-container
+  width: 800px
+  height: 600px
+  margin: 0 auto
+
+#cat-selection
+  background: #FFF
+  padding: 25px
+  text-align: center
+  @include border-radius(10px)
+  h2
+    color: #666
+    font:
+      size: 34px
+
+#cat-container
+  margin: 0 0 40px 0
+  @include display-box
+  .cat 
+    width: 200px
+    min-height: 330px
+    padding: 25px 10px 15px 10px
+    margin: 0 25px 0 0
+    text-align: center
+    cursor: pointer
+    background: #F1F1F1
+    @include border-radius(10px)
+    @include box-flex(1)
+    &:last-of-type
+      margin: 0
+    &.selected
+      background: #C8F2F8
+      h4
+        color: #4C9DAE
+    h4
+      color: #666
+      font:   
+        size: 24px
+      margin: 0 0 15px 0
+
+    .cat-image
+      height: 270px
+
+    ul
+      list-style: none
+      margin: 10px 0 0 0
+      padding: 0
+      @include display-box
+      li
+        background: 
+          color: #FFF
+          repeat: no-repeat
+          position: 3px 2px
+        margin: 0 5px 0 0
+        padding: 5px 10px
+        text-align: right
+        color: #666
+        font:   
+          size: 22px
+        @include box-flex(1)
+        @include border-radius(10px)
+        &.health
+          background: 
+            image: url(../img/icons/heart.png)
+        &.attack
+          background: 
+            image: url(../img/icons/sword.png)
+        &.magic
+          background:
+            image: url(../img/icons/magichat.png)
+          margin: 0
+#player-info
+  height: 45px
+  margin: 10px 0 0 0
+  label
+    font:
+      size: 28px
+    color: #666
+  input
+    padding: 10px
+    border: 2px solid #D6D6D6
+    outline: 0
+    @include border-radius(10px)
+  #start-game
+    font:
+      size: 28px
+    color: #FFF
+    background: #428B9A
+    text-decoration: none
+    padding: 5px 15px
+    @include border-radius(10px)
+      
+
+
+#canvas
+  width: 800px
+  height: 600px
+  display: none
