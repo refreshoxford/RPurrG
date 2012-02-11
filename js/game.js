@@ -10,15 +10,12 @@ var playerSpeed = 5.0;
 var FPS = 50;
 
 var assets = {
-    character: "img/character.png",
+    character:  "img/character.png",
     background: "img/background.png",
     foreground: "img/foreground.png",
-    // This is breaking it
-    //enemies: [
-    //    "img/enemy1.png",
-    //    "img/enemy2.png",
-    //    "img/enemy3.png"
-    //],
+    enemy1:     "img/enemy1.png",
+    enemy2:     "img/enemy2.png",
+    enemy3:     "img/enemy3.png",
 };
 
 var enemies = [];
@@ -27,12 +24,12 @@ var nextEnemyId = 0;
 function Enemy(type, posX, posY, hit) {
     this.id = nextEnemyId;
     nextEnemyId++; 
-    this.type = type;
+    this.type = type
     this.posX = posX;
     this.posY = posY;
     this.hit = hit;
     var draw = function(ctx) {
-        ctx.drawImage(assests.enemies[i], this.posX, this.posY);
+        ctx.drawImage(type, this.posX, this.posY);
     };
     var update = function(movX, movY, dmg) {
         this.posX += movX;
@@ -41,7 +38,8 @@ function Enemy(type, posX, posY, hit) {
     };
 }
 
-function addEnemy(enemy) {
+function spawnEnemy(type, posX, posY, hit) {
+    var enemy = new Enemy(type, posX, posY, hit);
     enemies[enemies.length] = enemy;
 }
 
@@ -94,7 +92,7 @@ function DrawPlayer(ctx) {
 
 function DrawEnemies(ctx) {
     $.each(enemies, function(idx, elt) {
-        enemies[idx].draw(); 
+        enemies[idx].draw(ctx); 
     }, false);
 }
 
