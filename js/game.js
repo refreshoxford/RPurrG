@@ -81,9 +81,9 @@ function DrawParallaxBackground(ctx) {
 
 function DrawParallaxForeground(ctx) {
     foregroundPos = cameraPosition * 2 % assets.foreground.width;
-    ctx.drawImage(assets.foreground, -foregroundPos, 300);
-    ctx.drawImage(assets.foreground, -foregroundPos + 400, 300);
-    ctx.drawImage(assets.foreground, -foregroundPos + 800, 300);
+    ctx.drawImage(assets.foreground, -foregroundPos, 475);
+    ctx.drawImage(assets.foreground, -foregroundPos + 400, 475);
+    ctx.drawImage(assets.foreground, -foregroundPos + 800, 475);
 }
 
 function DrawPlayer(ctx) {
