@@ -42,7 +42,7 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    context.drawImage(assets.character, 50, 450);
+    context.drawImage(assets.character, 50, 420);
 }
 
 function GameLoop() {
