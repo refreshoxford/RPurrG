@@ -28,21 +28,30 @@ function LoadAssets(fn) {
     });
 }
 
-function DrawParallax() {
+function DrawParallaxBackground(ctx) {
     backgroundPos = cameraPosition % assets.background.width;
+    ctx.drawImage(assets.background, -backgroundPos, 0);
+    ctx.drawImage(assets.background, -backgroundPos + 800, 0);
+}
+
+function DrawParallaxForeground(ctx) {
     foregroundPos = cameraPosition * 2 % assets.foreground.width;
-    context.drawImage(assets.background, -backgroundPos, 0);
-    context.drawImage(assets.background, -backgroundPos + 800, 0);
-    context.drawImage(assets.foreground, -foregroundPos, 300);
-    context.drawImage(assets.foreground, -foregroundPos + 400, 300);
-    context.drawImage(assets.foreground, -foregroundPos + 800, 300);
+    ctx.drawImage(assets.foreground, -foregroundPos, 300);
+    ctx.drawImage(assets.foreground, -foregroundPos + 400, 300);
+    ctx.drawImage(assets.foreground, -foregroundPos + 800, 300);
+}
+
+function DrawPlayer(ctx) {
+    context.drawImage(assets.character, 50, 450);
 }
 
 function GameLoop() {
 
     cameraPosition += 0.1;
 
-    DrawParallax(context);
+    DrawParallaxBackground(context);
+    DrawPlayer(context);
+    DrawParallaxForeground(context);
 
     setInterval(GameLoop, 200);
 }
@@ -52,13 +61,4 @@ $(document).ready(function() {
     context = canvas.getContext("2d");  
 
     LoadAssets(GameLoop);
-
-    /*
-    LoadAssets(function() {
-        context.drawImage(assets.background, 0, 0);
-        context.drawImage(assets.foreground, 0, 300);
-        context.drawImage(assets.foreground, 400, 300);
-        context.drawImage(assets.character, 10, 10);
-    });
-    */
 })
