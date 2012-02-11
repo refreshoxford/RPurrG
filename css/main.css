@@ -9,7 +9,7 @@
   margin: 0 auto;
 }
 
-#cat-selection {
+#cat-container {
   display: -moz-box;
   display: -webkit-box;
   display: -ms-box;
@@ -28,6 +28,6 @@
 
 #canvas {
   width: 800px;
-  height: 800px;
+  height: 600px;
   display: none;
 }
