@@ -79,7 +79,7 @@ function DrawParallaxBackground(ctx) {
     ctx.drawImage(assets.backgroundFar, -backgroundPos, 0);
     ctx.drawImage(assets.backgroundFar, -backgroundPos + assets.backgroundFar.width, 0);
 
-    middlePos = cameraPosition % assets.backgroundMid.width;
+    middlePos = cameraPosition * 1.3 % assets.backgroundMid.width;
     ctx.drawImage(assets.backgroundMid, -middlePos, 408);
     ctx.drawImage(assets.backgroundMid, -middlePos + assets.backgroundMid.width, 408);
 }
@@ -92,7 +92,7 @@ function DrawParallaxForeground(ctx) {
 }
 
 function DrawPlayer(ctx) {
-    ctx.drawImage(assets.character, playerX, playerY);
+    ctx.drawImage(assets.character, playerX - cameraPosition, playerY);
 }
 
 function DrawEnemies(ctx) {
