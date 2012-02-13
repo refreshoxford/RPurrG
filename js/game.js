@@ -158,11 +158,12 @@ function DrawEnemies(ctx) {
     }, false);
 }
 
-var frameCount = 0;
+var animationCount = 0;
+var ANIMATION_DELAY = 4;
 
 function GameLoop() {
 
-    frameCount++;
+    animationCount++;
     
     processKeyState();
 
@@ -174,7 +175,7 @@ function GameLoop() {
 
     setTimeout(GameLoop, 1000/FPS);
     
-    if (frameCount > 3) frameCount = 0;
+    if (animationCount > ANIMATION_DELAY) animationCount = 0;
 }
 
 var keyboardState = [];
@@ -203,7 +204,7 @@ function processKeyState() {
                     cameraPosition -= playerSpeed;
                     if (cameraPosition < 0) cameraPosition = 0;
                 }
-                if (frameCount === 3) player.Walk();
+                if (animationCount === ANIMATION_DELAY) player.Walk();
                 break;
             case 39: // Right cursor
                 player.X += playerSpeed;
@@ -211,7 +212,7 @@ function processKeyState() {
                 if (player.X - cameraPosition > 500) {
                     cameraPosition += playerSpeed;
                 }
-                if (frameCount === 3) player.Walk();
+                if (animationCount === ANIMATION_DELAY) player.Walk();
                 break;
         }
     }
